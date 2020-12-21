@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:vinays_billbook/MODELS/CartModel.dart';
-import 'package:vinays_billbook/MODELS/ProductModel.dart';
+import 'package:billbook/MODELS/CartModel.dart';
+import 'package:billbook/MODELS/ProductModel.dart';
 
 Stream<List<String>> getCategories() {
   var _data = Firestore.instance.collection('Categories').snapshots().map(

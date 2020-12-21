@@ -4,8 +4,8 @@ import 'dart:html';
 
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:vinays_billbook/MODELS/CartModel.dart';
-import 'package:vinays_billbook/MODELS/ProductModel.dart';
+import 'package:billbook/MODELS/CartModel.dart';
+import 'package:billbook/MODELS/ProductModel.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 

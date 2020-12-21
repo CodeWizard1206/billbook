@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:vinays_billbook/Constants.dart';
-import 'package:vinays_billbook/PAGES/DesktopCart.dart';
-import 'package:vinays_billbook/PAGES/MobileCart.dart';
+import 'package:billbook/Constants.dart';
+import 'package:billbook/PAGES/DesktopCart.dart';
+import 'package:billbook/PAGES/MobileCart.dart';
 
 class Cart extends StatefulWidget {
   Cart({Key key}) : super(key: key);

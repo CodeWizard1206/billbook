@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vinays_billbook/DatabaseHandler.dart';
-import 'package:vinays_billbook/MODELS/ProductModel.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/ProductListTile.dart';
+import 'package:billbook/DatabaseHandler.dart';
+import 'package:billbook/MODELS/ProductModel.dart';
+import 'package:billbook/UI/COMPONENTS/ProductListTile.dart';
 
 class CategoryBlock extends StatefulWidget {
   final String categoryTitle;

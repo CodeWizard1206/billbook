@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:vinays_billbook/Constants.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/AddCategory.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/AddProduct.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/AppDrawer.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/CustomButton.dart';
+import 'package:billbook/Constants.dart';
+import 'package:billbook/UI/COMPONENTS/AddCategory.dart';
+import 'package:billbook/UI/COMPONENTS/AddProduct.dart';
+import 'package:billbook/UI/COMPONENTS/AppDrawer.dart';
+import 'package:billbook/UI/COMPONENTS/CustomButton.dart';
 
 class AddProductDesktop extends StatefulWidget {
   final double pageWidth;

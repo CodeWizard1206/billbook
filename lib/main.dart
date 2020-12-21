@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:vinays_billbook/UI/AddProductData.dart';
-import 'package:vinays_billbook/UI/Bills.dart';
-import 'package:vinays_billbook/UI/Cart.dart';
-import 'package:vinays_billbook/UI/Home.dart';
-import 'package:vinays_billbook/UI/Login.dart';
-import 'package:vinays_billbook/Constants.dart';
+import 'package:billbook/UI/AddProductData.dart';
+import 'package:billbook/UI/Bills.dart';
+import 'package:billbook/UI/Cart.dart';
+import 'package:billbook/UI/Home.dart';
+import 'package:billbook/UI/Login.dart';
+import 'package:billbook/Constants.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vinay\'s Bill-Book',
+      title: 'Bill-Book',
       theme: ThemeData(
         primarySwatch: Colors.grey,
         primaryColor: Color(0xff2196f3),

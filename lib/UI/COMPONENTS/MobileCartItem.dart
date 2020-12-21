@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:vinays_billbook/Constants.dart';
+import 'package:billbook/Constants.dart';
 
 class MobileCartItem extends StatelessWidget {
   MobileCartItem({Key key}) : super(key: key);

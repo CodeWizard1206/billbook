@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:vinays_billbook/Constants.dart';
-import 'package:vinays_billbook/DatabaseHandler.dart';
-import 'package:vinays_billbook/MODELS/CartModel.dart';
-import 'package:vinays_billbook/PAGES/DesktopBills.dart';
-import 'package:vinays_billbook/PAGES/MobileBills.dart';
+import 'package:billbook/Constants.dart';
+import 'package:billbook/DatabaseHandler.dart';
+import 'package:billbook/MODELS/CartModel.dart';
+import 'package:billbook/PAGES/DesktopBills.dart';
+import 'package:billbook/PAGES/MobileBills.dart';
 
 class Bills extends StatefulWidget {
   Bills({Key key}) : super(key: key);

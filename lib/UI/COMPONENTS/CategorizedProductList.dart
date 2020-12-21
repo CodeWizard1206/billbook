@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/CategoryBlock.dart';
+import 'package:billbook/UI/COMPONENTS/CategoryBlock.dart';
 
 class CategorizedProductList extends StatelessWidget {
   final List<String> categoryData;

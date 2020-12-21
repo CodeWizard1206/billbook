@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:vinays_billbook/Constants.dart';
-import 'package:vinays_billbook/DatabaseHandler.dart';
-import 'package:vinays_billbook/MODELS/ProductModel.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/AppDrawer.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/CategorizedProductList.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/CustomButton.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/DataLoader.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/SearchResult.dart';
+import 'package:billbook/Constants.dart';
+import 'package:billbook/DatabaseHandler.dart';
+import 'package:billbook/MODELS/ProductModel.dart';
+import 'package:billbook/UI/COMPONENTS/AppDrawer.dart';
+import 'package:billbook/UI/COMPONENTS/CategorizedProductList.dart';
+import 'package:billbook/UI/COMPONENTS/CustomButton.dart';
+import 'package:billbook/UI/COMPONENTS/DataLoader.dart';
+import 'package:billbook/UI/COMPONENTS/SearchResult.dart';
 
 class MobileHome extends StatefulWidget {
   const MobileHome({Key key}) : super(key: key);

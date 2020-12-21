@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:vinays_billbook/Constants.dart';
-import 'package:vinays_billbook/DatabaseHandler.dart';
-import 'package:vinays_billbook/MODELS/ProductModel.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/CustomButton.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/DataLoader.dart';
+import 'package:billbook/Constants.dart';
+import 'package:billbook/DatabaseHandler.dart';
+import 'package:billbook/MODELS/ProductModel.dart';
+import 'package:billbook/UI/COMPONENTS/CustomButton.dart';
+import 'package:billbook/UI/COMPONENTS/DataLoader.dart';
 
 class AddProduct extends StatelessWidget {
   const AddProduct({Key key}) : super(key: key);

@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
-import 'package:vinays_billbook/Constants.dart';
-import 'package:vinays_billbook/MODELS/CartModel.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/CustomButton.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/DesktopCartItem.dart';
+import 'package:billbook/Constants.dart';
+import 'package:billbook/MODELS/CartModel.dart';
+import 'package:billbook/UI/COMPONENTS/CustomButton.dart';
+import 'package:billbook/UI/COMPONENTS/DesktopCartItem.dart';
 
 class DesktopCart extends StatefulWidget {
   final double pageWidth;

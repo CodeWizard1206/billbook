@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vinays_billbook/Constants.dart';
+import 'package:billbook/Constants.dart';
 
 class DesktopCartItem extends StatelessWidget {
   const DesktopCartItem({Key key}) : super(key: key);

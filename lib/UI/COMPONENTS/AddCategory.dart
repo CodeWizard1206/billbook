@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:vinays_billbook/Constants.dart';
-import 'package:vinays_billbook/DatabaseHandler.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/CustomButton.dart';
+import 'package:billbook/Constants.dart';
+import 'package:billbook/DatabaseHandler.dart';
+import 'package:billbook/UI/COMPONENTS/CustomButton.dart';
 
 class AddCategory extends StatefulWidget {
   AddCategory({Key key}) : super(key: key);

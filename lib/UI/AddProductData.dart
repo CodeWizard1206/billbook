@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:vinays_billbook/Constants.dart';
-import 'package:vinays_billbook/DatabaseHandler.dart';
-import 'package:vinays_billbook/PAGES/AddProductDesktop.dart';
-import 'package:vinays_billbook/PAGES/AddProductMobile.dart';
+import 'package:billbook/Constants.dart';
+import 'package:billbook/DatabaseHandler.dart';
+import 'package:billbook/PAGES/AddProductDesktop.dart';
+import 'package:billbook/PAGES/AddProductMobile.dart';
 
 class AddProductData extends StatefulWidget {
   AddProductData({Key key}) : super(key: key);

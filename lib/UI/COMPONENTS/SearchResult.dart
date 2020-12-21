@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vinays_billbook/MODELS/ProductModel.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/DataLoader.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/SearchListItem.dart';
+import 'package:billbook/MODELS/ProductModel.dart';
+import 'package:billbook/UI/COMPONENTS/DataLoader.dart';
+import 'package:billbook/UI/COMPONENTS/SearchListItem.dart';
 
 // ignore: must_be_immutable
 class SearchResult extends StatefulWidget {

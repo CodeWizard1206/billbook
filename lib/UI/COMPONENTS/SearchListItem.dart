@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:vinays_billbook/Constants.dart';
-import 'package:vinays_billbook/MODELS/ProductModel.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/CustomButton.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/DataLoader.dart';
+import 'package:billbook/Constants.dart';
+import 'package:billbook/MODELS/ProductModel.dart';
+import 'package:billbook/UI/COMPONENTS/CustomButton.dart';
+import 'package:billbook/UI/COMPONENTS/DataLoader.dart';
 
 // ignore: must_be_immutable
 class SearchListItem extends StatefulWidget {

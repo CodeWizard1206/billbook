@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:vinays_billbook/MODELS/CartModel.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/AppDrawer.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/BillsItem.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/CustomButton.dart';
-import 'package:vinays_billbook/UI/COMPONENTS/DataLoader.dart';
+import 'package:billbook/MODELS/CartModel.dart';
+import 'package:billbook/UI/COMPONENTS/AppDrawer.dart';
+import 'package:billbook/UI/COMPONENTS/BillsItem.dart';
+import 'package:billbook/UI/COMPONENTS/CustomButton.dart';
+import 'package:billbook/UI/COMPONENTS/DataLoader.dart';
 
 class DesktopBills extends StatefulWidget {
   final double pageWidth;
