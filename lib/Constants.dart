@@ -14,140 +14,111 @@ const Color kPrimaryDarkColor = Color(0xFF373435);
 
 void createPdf(CartModel _data) {
   var pdf = pw.Document();
+  List<pw.TableRow> _rowData = [
+    pw.TableRow(
+      children: [
+        pw.Expanded(
+          flex: 1,
+          child: getHeading('Sr. No.'),
+        ),
+        pw.Expanded(
+          flex: 8,
+          child: getHeading('Products'),
+        ),
+        pw.Expanded(
+          flex: 1,
+          child: getHeading('Qty'),
+        ),
+        pw.Expanded(
+          flex: 2,
+          child: getHeading('Rate'),
+        ),
+      ],
+    ),
+  ];
+
+  _rowData.addAll(getBillItemList(_data.products));
   pdf.addPage(
-    pw.Page(
+    pw.MultiPage(
       orientation: pw.PageOrientation.portrait,
-      margin: const pw.EdgeInsets.all(30.0),
+      margin: const pw.EdgeInsets.all(50.0),
       pageFormat: PdfPageFormat.a4,
       build: (pw.Context context) {
-        return pw.Column(
-          mainAxisAlignment: pw.MainAxisAlignment.start,
-          crossAxisAlignment: pw.CrossAxisAlignment.center,
-          children: [
-            pw.Text(
-              'CUSTOMER RECEIPT',
-              style: pw.TextStyle(
-                fontSize: 20.0,
-                fontWeight: pw.FontWeight.bold,
-              ),
+        return [
+          pw.Text(
+            'CUSTOMER RECEIPT',
+            style: pw.TextStyle(
+              fontSize: 20.0,
+              fontWeight: pw.FontWeight.bold,
             ),
-            pw.Row(
-              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-              children: [
-                pw.Text(
-                  'Bill Number : ' + _data.billNumber.toString(),
-                  style: pw.TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: pw.FontWeight.bold,
-                  ),
-                ),
-                pw.Text(
-                  'Purchase Date : ' + _data.purchaseDate,
-                  style: pw.TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: pw.FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            pw.SizedBox(
-              width: double.maxFinite,
-              child: pw.Padding(
-                padding: const pw.EdgeInsets.symmetric(
-                  vertical: 10.0,
-                ),
-                child: pw.Text(
-                  _data.buyerName,
-                  style: pw.TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: pw.FontWeight.bold,
-                    fontStyle: pw.FontStyle.italic,
-                  ),
+          ),
+          pw.SizedBox(
+            height: 10.0,
+          ),
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            children: [
+              pw.Text(
+                'Bill Number : ' + _data.billNumber.toString(),
+                style: pw.TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: pw.FontWeight.bold,
                 ),
               ),
-            ),
-            pw.Container(
-              height: 680,
-              // width: double.maxFinite,
+              pw.Text(
+                'Purchase Date : ' + _data.purchaseDate,
+                style: pw.TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          pw.SizedBox(
+            width: double.maxFinite,
+            child: pw.Padding(
               padding: const pw.EdgeInsets.symmetric(
-                horizontal: 20.0,
                 vertical: 10.0,
               ),
-              child: pw.Column(
-                mainAxisSize: pw.MainAxisSize.min,
-                children: [
-                  pw.Expanded(
-                    child: pw.Container(
-                      height: double.maxFinite,
-                      decoration: pw.BoxDecoration(
-                        border: pw.Border.all(
-                          color: PdfColors.black,
-                          width: 1,
-                        ),
-                      ),
-                      child: pw.Column(
-                        mainAxisSize: pw.MainAxisSize.min,
-                        mainAxisAlignment: pw.MainAxisAlignment.start,
-                        children: [
-                          pw.Row(
-                            mainAxisSize: pw.MainAxisSize.min,
-                            children: [
-                              pw.Expanded(
-                                flex: 1,
-                                child: getHeading('Sr. No.'),
-                              ),
-                              pw.Expanded(
-                                flex: 8,
-                                child: getHeading('Products'),
-                              ),
-                              pw.Expanded(
-                                flex: 1,
-                                child: getHeading('Qty'),
-                              ),
-                              pw.Expanded(
-                                flex: 2,
-                                child: getHeading('Rate'),
-                              ),
-                            ],
-                          ),
-                          pw.SizedBox(
-                            height: 5.0,
-                          ),
-                          pw.Column(
-                            mainAxisSize: pw.MainAxisSize.min,
-                            mainAxisAlignment: pw.MainAxisAlignment.start,
-                            children: getBillItemList(_data.products),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  pw.SizedBox(
-                    height: 15.0,
-                  ),
-                  pw.Row(
-                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                    children: [
-                      pw.Text(
-                        'Total Amount : ',
-                        style: pw.TextStyle(
-                          fontSize: 17.0,
-                          fontWeight: pw.FontWeight.bold,
-                        ),
-                      ),
-                      pw.Text(
-                        'Rs. ' + _data.totalPrice,
-                        style: pw.TextStyle(
-                          fontSize: 17.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+              child: pw.Text(
+                _data.buyerName,
+                style: pw.TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: pw.FontWeight.bold,
+                  fontStyle: pw.FontStyle.italic,
+                ),
               ),
             ),
-          ],
-        );
+          ),
+          pw.Table(
+            border: pw.TableBorder.all(
+              color: PdfColors.black,
+              width: 1,
+            ),
+            children: _rowData,
+          ),
+          pw.SizedBox(
+            height: 15.0,
+          ),
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            children: [
+              pw.Text(
+                'Total Amount : ',
+                style: pw.TextStyle(
+                  fontSize: 17.0,
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
+              pw.Text(
+                'Rs. ' + _data.totalPrice,
+                style: pw.TextStyle(
+                  fontSize: 17.0,
+                ),
+              ),
+            ],
+          ),
+        ];
       },
     ),
   );
@@ -191,6 +162,7 @@ pw.Container getRowData(String text) {
     width: double.maxFinite,
     padding: const pw.EdgeInsets.symmetric(
       horizontal: 6.0,
+      vertical: 5.0,
     ),
     child: pw.Text(
       text,
@@ -202,35 +174,29 @@ pw.Container getRowData(String text) {
   );
 }
 
-List<pw.Padding> getBillItemList(List<dynamic> _data) {
+List<pw.TableRow> getBillItemList(List<dynamic> _data) {
   int i = 0;
   return _data.map((map) {
     i++;
-    return pw.Padding(
-      padding: const pw.EdgeInsets.symmetric(
-        vertical: 3.0,
-      ),
-      child: pw.Row(
-        mainAxisSize: pw.MainAxisSize.min,
-        children: [
-          pw.Expanded(
-            flex: 1,
-            child: getRowData(i.toString()),
-          ),
-          pw.Expanded(
-            flex: 8,
-            child: getRowData(map['productName']),
-          ),
-          pw.Expanded(
-            flex: 1,
-            child: getRowData(map['productQty']),
-          ),
-          pw.Expanded(
-            flex: 2,
-            child: getRowData(map['productPrice']),
-          ),
-        ],
-      ),
+    return pw.TableRow(
+      children: [
+        pw.Expanded(
+          flex: 1,
+          child: getRowData(i.toString()),
+        ),
+        pw.Expanded(
+          flex: 8,
+          child: getRowData(map['productName']),
+        ),
+        pw.Expanded(
+          flex: 1,
+          child: getRowData(map['productQty']),
+        ),
+        pw.Expanded(
+          flex: 2,
+          child: getRowData(map['productPrice']),
+        ),
+      ],
     );
   }).toList();
 }
