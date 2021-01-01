@@ -7,9 +7,11 @@ import 'package:billbook/UI/COMPONENTS/SearchListItem.dart';
 // ignore: must_be_immutable
 class SearchResult extends StatefulWidget {
   String searchData;
+  List<String> filterList;
   SearchResult({
     Key key,
     this.searchData,
+    this.filterList,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,14 @@ class _SearchResultState extends State<SearchResult> {
             (element) => element.productName.contains(widget.searchData),
           )
           .toList();
+
+      if (widget.filterList.length != 0) {
+        _data = _data
+            .where(
+              (element) => widget.filterList.contains(element.productCategory),
+            )
+            .toList();
+      }
       return ListView(
         children: [
           Text(

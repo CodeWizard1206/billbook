@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:billbook/Constants.dart';
 import 'package:billbook/DatabaseHandler.dart';
+import 'package:billbook/MODELS/CategoryModel.dart';
 import 'package:billbook/MODELS/ProductModel.dart';
 import 'package:billbook/UI/COMPONENTS/AppDrawer.dart';
 import 'package:billbook/UI/COMPONENTS/CategorizedProductList.dart';
+import 'package:billbook/UI/COMPONENTS/CategoryList.dart';
 import 'package:billbook/UI/COMPONENTS/CustomButton.dart';
 import 'package:billbook/UI/COMPONENTS/DataLoader.dart';
 import 'package:billbook/UI/COMPONENTS/SearchResult.dart';
@@ -20,6 +23,8 @@ class _MobileHomeState extends State<MobileHome> {
   final TextEditingController _controller = new TextEditingController();
   Widget mainChildWidget;
   bool firstTime = true;
+  bool filter = false;
+  List<String> _filterList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +102,17 @@ class _MobileHomeState extends State<MobileHome> {
                             mainChildWidget = CategorizedProductList(
                               categoryData: _data,
                             );
+                            filter = false;
+                          });
+                        }
+                      },
+                      onFieldSubmitted: (value) {
+                        if (value == '') {
+                          setState(() {
+                            mainChildWidget = CategorizedProductList(
+                              categoryData: _data,
+                            );
+                            filter = false;
                           });
                         } else {
                           setState(() {
@@ -105,13 +121,108 @@ class _MobileHomeState extends State<MobileHome> {
                               create: (context) => getSearchResult(),
                               child: SearchResult(
                                 searchData: value,
+                                filterList: _filterList,
                               ),
                             );
+                            filter = true;
                           });
                         }
                       },
                     ),
                   ),
+                ),
+              ),
+              Visibility(
+                visible: filter,
+                child: SizedBox(
+                  width: 10.0,
+                ),
+              ),
+              Visibility(
+                visible: filter,
+                child: MaterialMenuButton(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10.0,
+                  ),
+                  buttonText: '',
+                  leadingIconData: Icon(
+                    FlutterIcons.filter_faw5s,
+                    color: Colors.white,
+                  ),
+                  onPressed: () async {
+                    var _data = await Firestore.instance
+                        .collection('Categories')
+                        .getDocuments();
+
+                    List<CategoryModel> value = _data.documents
+                        .map(
+                          (e) => CategoryModel(
+                            name: e.data['name'],
+                            added: _filterList.contains(e.data['name']),
+                          ),
+                        )
+                        .toList();
+
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) => AlertDialog(
+                        title: Text(
+                          'Select a Category...',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        content: Container(
+                          constraints: BoxConstraints(
+                            maxHeight: 500,
+                          ),
+                          width: (MediaQuery.of(context).size.width - 100),
+                          child: ListView.builder(
+                            itemCount: value.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CategoryList(
+                                data: value[index],
+                                stateChanged: (status) {
+                                  if (status) {
+                                    _filterList.add(value[index].name);
+                                  } else {
+                                    _filterList.remove(value[index].name);
+                                  }
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                        actions: [
+                          MaterialMenuButton(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0,
+                            ),
+                            buttonText: 'DONE',
+                            leadingIconData: Icon(
+                              FlutterIcons.check_circle_faw5s,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              setState(() {
+                                mainChildWidget =
+                                    StreamProvider<List<ProductModel>>(
+                                  create: (context) => getSearchResult(),
+                                  child: SearchResult(
+                                    searchData: _controller.text,
+                                    filterList: _filterList,
+                                  ),
+                                );
+                                filter = true;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
             ],

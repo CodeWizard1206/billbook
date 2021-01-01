@@ -280,6 +280,7 @@ class _DesktopCartState extends State<DesktopCart> {
                                         var _result = await Firestore.instance
                                             .collection('Bills')
                                             .add(_data.toMap());
+
                                         if (_result != null) {
                                           setState(() {
                                             Constants.kCartProduct.clear();
@@ -353,6 +354,6 @@ class _DesktopCartState extends State<DesktopCart> {
           double.parse(product.productQty) * double.parse(product.productPrice);
       _total += _temp;
     });
-    return _total.toString();
+    return _total.toStringAsFixed(3);
   }
 }
