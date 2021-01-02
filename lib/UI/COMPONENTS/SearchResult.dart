@@ -25,7 +25,9 @@ class _SearchResultState extends State<SearchResult> {
     if (_data != null) {
       _data = _data
           .where(
-            (element) => element.productName.contains(widget.searchData),
+            (element) => element.productName
+                .toLowerCase()
+                .contains(widget.searchData.toLowerCase()),
           )
           .toList();
 
