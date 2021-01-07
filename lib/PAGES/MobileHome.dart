@@ -104,16 +104,6 @@ class _MobileHomeState extends State<MobileHome> {
                             );
                             filter = false;
                           });
-                        }
-                      },
-                      onFieldSubmitted: (value) {
-                        if (value == '') {
-                          setState(() {
-                            mainChildWidget = CategorizedProductList(
-                              categoryData: _data,
-                            );
-                            filter = false;
-                          });
                         } else {
                           setState(() {
                             mainChildWidget =
@@ -128,6 +118,28 @@ class _MobileHomeState extends State<MobileHome> {
                           });
                         }
                       },
+                      // onFieldSubmitted: (value) {
+                      //   if (value == '') {
+                      //     setState(() {
+                      //       mainChildWidget = CategorizedProductList(
+                      //         categoryData: _data,
+                      //       );
+                      //       filter = false;
+                      //     });
+                      //   } else {
+                      //     setState(() {
+                      //       mainChildWidget =
+                      //           StreamProvider<List<ProductModel>>(
+                      //         create: (context) => getSearchResult(),
+                      //         child: SearchResult(
+                      //           searchData: value,
+                      //           filterList: _filterList,
+                      //         ),
+                      //       );
+                      //       filter = true;
+                      //     });
+                      //   }
+                      // },
                     ),
                   ),
                 ),

@@ -106,16 +106,6 @@ class _DesktopHomeState extends State<DesktopHome> {
                           );
                           filter = false;
                         });
-                      }
-                    },
-                    onFieldSubmitted: (value) {
-                      if (value == '') {
-                        setState(() {
-                          mainChildWidget = CategorizedProductList(
-                            categoryData: _data,
-                          );
-                          filter = false;
-                        });
                       } else {
                         setState(() {
                           mainChildWidget = StreamProvider<List<ProductModel>>(
@@ -129,6 +119,27 @@ class _DesktopHomeState extends State<DesktopHome> {
                         });
                       }
                     },
+                    // onFieldSubmitted: (value) {
+                    //   if (value == '') {
+                    //     setState(() {
+                    //       mainChildWidget = CategorizedProductList(
+                    //         categoryData: _data,
+                    //       );
+                    //       filter = false;
+                    //     });
+                    //   } else {
+                    //     setState(() {
+                    //       mainChildWidget = StreamProvider<List<ProductModel>>(
+                    //         create: (context) => getSearchResult(),
+                    //         child: SearchResult(
+                    //           searchData: value,
+                    //           filterList: _filterList,
+                    //         ),
+                    //       );
+                    //       filter = true;
+                    //     });
+                    //   }
+                    // },
                   ),
                 ),
               ),
