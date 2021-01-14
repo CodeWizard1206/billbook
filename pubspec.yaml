@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.1
+  cupertino_icons: ^0.1.1
   responsive_builder: ^0.2.0+2
   provider: ^4.3.0
   firebase_core: ^0.4.5

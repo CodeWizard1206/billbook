@@ -80,6 +80,19 @@ bool deleteProduct(String docID) {
   }
 }
 
+Future<bool> updateProduct(ProductModel product) async {
+  try {
+    await Firestore.instance
+        .collection('Products')
+        .document(product.id)
+        .updateData(product.toMap());
+    return true;
+  } catch (e) {
+    print(e.toString());
+    return false;
+  }
+}
+
 Stream<List<CartModel>> getBills() {
   var _data = Firestore.instance
       .collection('Bills')

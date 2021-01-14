@@ -32,7 +32,7 @@ class _AddProductMainState extends State<AddProductMain> {
   final TextEditingController _categoryController = new TextEditingController();
   final TextEditingController _priceController = new TextEditingController();
   bool progressing = false;
-  ProductModel _deleteData;
+  ProductModel _changableData;
 
   List<DropdownMenuItem> _categories = [
     DropdownMenuItem(
@@ -93,9 +93,10 @@ class _AddProductMainState extends State<AddProductMain> {
               ),
               maxLines: 1,
               onChanged: (value) {
-                if (this._nameController.text != this._deleteData.productName &&
-                    this._deleteData != null) {
-                  this._deleteData = null;
+                if (this._nameController.text !=
+                        this._changableData.productName &&
+                    this._changableData != null) {
+                  this._changableData = null;
                 }
               },
             ),
@@ -239,7 +240,7 @@ class _AddProductMainState extends State<AddProductMain> {
                     setState(() {
                       this.progressing = true;
                     });
-                    if (this._deleteData == null) {
+                    if (this._changableData == null) {
                       List<ProductModel> _data = await getProductList();
                       setState(() {
                         this.progressing = false;
@@ -257,9 +258,15 @@ class _AddProductMainState extends State<AddProductMain> {
                               .map(
                                 (product) => SimpleDialogOption(
                                   onPressed: () {
-                                    this._deleteData = product;
+                                    this._changableData = product;
                                     this._nameController.text =
                                         product.productName;
+                                    this._nameController.text =
+                                        product.productName;
+                                    this._categoryController.text =
+                                        product.productCategory;
+                                    this._priceController.text =
+                                        product.productPrice;
                                     Navigator.pop(context);
                                   },
                                   child: Text(
@@ -271,7 +278,7 @@ class _AddProductMainState extends State<AddProductMain> {
                         ),
                       );
                     } else {
-                      bool _result = deleteProduct(this._deleteData.id);
+                      bool _result = deleteProduct(this._changableData.id);
                       if (_result) {
                         showFlushBar(
                           context: context,
@@ -289,8 +296,94 @@ class _AddProductMainState extends State<AddProductMain> {
                       }
                       setState(() {
                         this.progressing = false;
-                        this._deleteData = null;
+                        this._changableData = null;
                         this._nameController.text = '';
+                        this._categoryController.text = '';
+                        this._priceController.text = '';
+                      });
+                    }
+                  },
+                ),
+                SizedBox(
+                  width: 8.0,
+                ),
+                MaterialMenuButton(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10.0,
+                  ),
+                  buttonText: 'UPDATE',
+                  leadingIconData: Icon(
+                    FlutterIcons.update_mdi,
+                    color: Colors.white,
+                  ),
+                  onPressed: () async {
+                    setState(() {
+                      this.progressing = true;
+                    });
+                    if (this._changableData == null) {
+                      List<ProductModel> _data = await getProductList();
+                      setState(() {
+                        this.progressing = false;
+                      });
+                      showDialog(
+                        context: context,
+                        builder: (_) => SimpleDialog(
+                          title: Text(
+                            'Select a Product',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          children: _data
+                              .map(
+                                (product) => SimpleDialogOption(
+                                  onPressed: () {
+                                    this._changableData = product;
+                                    this._nameController.text =
+                                        product.productName;
+                                    this._categoryController.text =
+                                        product.productCategory;
+                                    this._priceController.text =
+                                        product.productPrice;
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    product.productName,
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      );
+                    } else {
+                      this._changableData.productName =
+                          this._nameController.text;
+                      this._changableData.productCategory =
+                          this._categoryController.text;
+                      this._changableData.productPrice =
+                          this._priceController.text;
+                      bool _result = await updateProduct(this._changableData);
+                      if (_result) {
+                        showFlushBar(
+                          context: context,
+                          title: 'Done!',
+                          message: 'Data Updated...',
+                          alertStyle: false,
+                        );
+                      } else {
+                        showFlushBar(
+                          context: context,
+                          title: 'Error!',
+                          message: 'Data Updatation Failed...',
+                          alertStyle: true,
+                        );
+                      }
+                      setState(() {
+                        this.progressing = false;
+                        this._changableData = null;
+                        this._nameController.text = '';
+                        this._categoryController.text = '';
+                        this._priceController.text = '';
                       });
                     }
                   },
