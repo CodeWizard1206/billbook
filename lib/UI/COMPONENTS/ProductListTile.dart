@@ -343,7 +343,6 @@ class _MobileProductTileState extends State<MobileProductTile> {
                       ),
                     ),
                     maxLines: 1,
-                    onChanged: (value) {},
                     onFieldSubmitted: (value) {
                       if (value == '') {
                         _priceController.text = widget.product.productPrice;

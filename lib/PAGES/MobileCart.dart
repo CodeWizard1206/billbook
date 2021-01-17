@@ -216,6 +216,9 @@ class _MobileCartState extends State<MobileCart> {
                             ],
                           ),
                         ),
+                        SizedBox(
+                          height: 60.0,
+                        ),
                       ],
                     ),
                     Align(
@@ -356,6 +359,6 @@ class _MobileCartState extends State<MobileCart> {
           double.parse(product.productQty) * double.parse(product.productPrice);
       _total += _temp;
     });
-    return _total.toString();
+    return _total.toStringAsFixed(2);
   }
 }

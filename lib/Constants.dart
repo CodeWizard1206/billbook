@@ -1,7 +1,6 @@
 import 'dart:convert';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
-
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:billbook/MODELS/CartModel.dart';
@@ -33,6 +32,10 @@ void createPdf(CartModel _data) {
           flex: 2,
           child: getHeading('Rate'),
         ),
+        pw.Expanded(
+          flex: 2,
+          child: getHeading('Price'),
+        ),
       ],
     ),
   ];
@@ -46,7 +49,7 @@ void createPdf(CartModel _data) {
       build: (pw.Context context) {
         return [
           pw.Text(
-            'CUSTOMER RECEIPT',
+            'CUSTOMER INVOICE',
             style: pw.TextStyle(
               fontSize: 20.0,
               fontWeight: pw.FontWeight.bold,
@@ -174,6 +177,15 @@ pw.Container getRowData(String text) {
   );
 }
 
+String getItemRate(dynamic map) {
+  double _qty = double.parse(map['productQty']);
+  double _price = double.parse(map['productPrice']);
+
+  double _returnable = _qty * _price;
+
+  return _returnable.toStringAsFixed(2);
+}
+
 List<pw.TableRow> getBillItemList(List<dynamic> _data) {
   int i = 0;
   return _data.map((map) {
@@ -195,6 +207,10 @@ List<pw.TableRow> getBillItemList(List<dynamic> _data) {
         pw.Expanded(
           flex: 2,
           child: getRowData(map['productPrice']),
+        ),
+        pw.Expanded(
+          flex: 2,
+          child: getRowData(getItemRate(map)),
         ),
       ],
     );

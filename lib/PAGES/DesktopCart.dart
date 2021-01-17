@@ -354,6 +354,6 @@ class _DesktopCartState extends State<DesktopCart> {
           double.parse(product.productQty) * double.parse(product.productPrice);
       _total += _temp;
     });
-    return _total.toStringAsFixed(3);
+    return _total.toStringAsFixed(2);
   }
 }

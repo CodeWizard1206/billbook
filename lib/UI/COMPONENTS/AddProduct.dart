@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:billbook/Constants.dart';
 import 'package:billbook/DatabaseHandler.dart';
 import 'package:billbook/MODELS/ProductModel.dart';
@@ -247,34 +248,17 @@ class _AddProductMainState extends State<AddProductMain> {
                       });
                       showDialog(
                         context: context,
-                        builder: (_) => SimpleDialog(
-                          title: Text(
-                            'Select a Product',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          children: _data
-                              .map(
-                                (product) => SimpleDialogOption(
-                                  onPressed: () {
-                                    this._changableData = product;
-                                    this._nameController.text =
-                                        product.productName;
-                                    this._nameController.text =
-                                        product.productName;
-                                    this._categoryController.text =
-                                        product.productCategory;
-                                    this._priceController.text =
-                                        product.productPrice;
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    product.productName,
-                                  ),
-                                ),
-                              )
-                              .toList(),
+                        builder: (_) => ProductDialog(
+                          data: _data,
+                          onPressed: (ProductModel product) {
+                            this._changableData = product;
+                            this._nameController.text = product.productName;
+                            this._nameController.text = product.productName;
+                            this._categoryController.text =
+                                product.productCategory;
+                            this._priceController.text = product.productPrice;
+                            Navigator.pop(context);
+                          },
                         ),
                       );
                     } else {
@@ -327,32 +311,17 @@ class _AddProductMainState extends State<AddProductMain> {
                       });
                       showDialog(
                         context: context,
-                        builder: (_) => SimpleDialog(
-                          title: Text(
-                            'Select a Product',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          children: _data
-                              .map(
-                                (product) => SimpleDialogOption(
-                                  onPressed: () {
-                                    this._changableData = product;
-                                    this._nameController.text =
-                                        product.productName;
-                                    this._categoryController.text =
-                                        product.productCategory;
-                                    this._priceController.text =
-                                        product.productPrice;
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    product.productName,
-                                  ),
-                                ),
-                              )
-                              .toList(),
+                        builder: (_) => ProductDialog(
+                          data: _data,
+                          onPressed: (ProductModel product) {
+                            this._changableData = product;
+                            this._nameController.text = product.productName;
+                            this._nameController.text = product.productName;
+                            this._categoryController.text =
+                                product.productCategory;
+                            this._priceController.text = product.productPrice;
+                            Navigator.pop(context);
+                          },
                         ),
                       );
                     } else {
@@ -399,5 +368,108 @@ class _AddProductMainState extends State<AddProductMain> {
         width: double.maxFinite,
       );
     }
+  }
+}
+
+class ProductDialog extends StatefulWidget {
+  final Function onPressed;
+  final List<ProductModel> data;
+  ProductDialog({Key key, this.data, this.onPressed}) : super(key: key);
+
+  @override
+  _ProductDialogState createState() => _ProductDialogState();
+}
+
+class _ProductDialogState extends State<ProductDialog> {
+  List<ProductModel> _data;
+
+  @override
+  void initState() {
+    this._data = widget.data;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SimpleDialog(
+      title: TextFormField(
+        // controller: _controller,
+        decoration: InputDecoration(
+          hintText: 'Search...',
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(50.0),
+            borderSide: BorderSide(
+              color: Colors.transparent,
+              width: 0,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(50.0),
+            borderSide: BorderSide(
+              color: Colors.transparent,
+              width: 0,
+            ),
+          ),
+        ),
+        maxLines: 1,
+        onChanged: (value) {
+          if (value != '') {
+            setState(() {
+              this._data = this
+                  ._data
+                  .where((element) => element.productName
+                      .toLowerCase()
+                      .contains(value.toLowerCase()))
+                  .toList();
+            });
+          } else {
+            setState(() {
+              this._data = this.widget.data;
+            });
+          }
+        },
+      ),
+      // title: Text(
+      //   'Select a Product',
+      //   style: TextStyle(
+      //     fontWeight: FontWeight.bold,
+      //   ),
+      // ),
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: _data
+              .map(
+                (product) => SimpleDialogOption(
+                  onPressed: () {
+                    this.widget.onPressed(product);
+                  },
+                  child: ScreenTypeLayout.builder(
+                    desktop: (_) => Container(
+                      width: 600,
+                      child: Text(
+                        product.productName,
+                      ),
+                    ),
+                    tablet: (_) => Container(
+                      width: 600,
+                      child: Text(
+                        product.productName,
+                      ),
+                    ),
+                    mobile: (_) => Container(
+                      width: double.maxFinite,
+                      child: Text(
+                        product.productName,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+      ],
+    );
   }
 }

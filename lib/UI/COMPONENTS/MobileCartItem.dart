@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:billbook/Constants.dart';
+import 'package:billbook/MODELS/ProductModel.dart';
 
 class MobileCartItem extends StatelessWidget {
   MobileCartItem({Key key}) : super(key: key);
@@ -65,7 +65,7 @@ class MobileCartItem extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 70.0,
+                        width: 40.0,
                         child: Text(
                           'X',
                           textAlign: TextAlign.center,
@@ -73,39 +73,37 @@ class MobileCartItem extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              FontAwesome.rupee,
-                              size: 34.0,
-                            ),
-                            Expanded(
-                              child: TextFormField(
-                                initialValue: product.productPrice,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  hintText: 'Price',
-                                  filled: true,
-                                  enabled: false,
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 0,
-                                    ),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: kPrimaryColor,
-                                      width: 2,
-                                    ),
-                                  ),
-                                ),
-                                maxLines: 1,
-                                onChanged: (value) {},
+                        child: TextFormField(
+                          initialValue: product.productPrice,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            hintText: 'Price',
+                            filled: true,
+                            enabled: false,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 0,
                               ),
                             ),
-                          ],
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: kPrimaryColor,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                          maxLines: 1,
+                          onChanged: (value) {},
+                        ),
+                      ),
+                      SizedBox(
+                        width: 8.0,
+                      ),
+                      Text(
+                        getItemRate(product),
+                        style: TextStyle(
+                          fontSize: 22.0,
                         ),
                       ),
                     ],
@@ -116,5 +114,14 @@ class MobileCartItem extends StatelessWidget {
           )
           .toList(),
     );
+  }
+
+  String getItemRate(ProductModel product) {
+    double _qty = double.parse(product.productQty);
+    double _price = double.parse(product.productPrice);
+
+    double _returnable = _qty * _price;
+
+    return _returnable.toStringAsFixed(2);
   }
 }

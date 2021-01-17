@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:billbook/Constants.dart';
+import 'package:billbook/MODELS/ProductModel.dart';
 
 class DesktopCartItem extends StatelessWidget {
   const DesktopCartItem({Key key}) : super(key: key);
@@ -78,11 +79,29 @@ class DesktopCartItem extends StatelessWidget {
                   SizedBox(
                     width: 8.0,
                   ),
+                  Text(
+                    getItemRate(product),
+                    style: TextStyle(
+                      fontSize: 28.0,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
                 ],
               ),
             ),
           )
           .toList(),
     );
+  }
+
+  String getItemRate(ProductModel product) {
+    double _qty = double.parse(product.productQty);
+    double _price = double.parse(product.productPrice);
+
+    double _returnable = _qty * _price;
+
+    return _returnable.toStringAsFixed(2);
   }
 }

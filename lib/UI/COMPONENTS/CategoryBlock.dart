@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:billbook/Constants.dart';
 import 'package:billbook/DatabaseHandler.dart';
 import 'package:billbook/MODELS/ProductModel.dart';
 import 'package:billbook/UI/COMPONENTS/ProductListTile.dart';
@@ -13,6 +15,7 @@ class CategoryBlock extends StatefulWidget {
 }
 
 class _CategoryBlockState extends State<CategoryBlock> {
+  bool expanded = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,12 +31,40 @@ class _CategoryBlockState extends State<CategoryBlock> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                ' ' + widget.categoryTitle,
-                style: TextStyle(
-                  fontSize: 34.0,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    ' ' + widget.categoryTitle,
+                    style: TextStyle(
+                      fontSize: 34.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Expanded(
+                    child: SizedBox(),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        expanded = !expanded;
+                      });
+                    },
+                    child: SizedBox(
+                      width: 40.0,
+                      child: Icon(
+                        expanded
+                            ? FlutterIcons.angle_up_faw5s
+                            : FlutterIcons.angle_down_faw5s,
+                        color: kPrimaryColor,
+                        size: 42.0,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                ],
               ),
               SizedBox(
                 height: 6.0,
@@ -41,7 +72,10 @@ class _CategoryBlockState extends State<CategoryBlock> {
               StreamProvider<List<ProductModel>>(
                 create: (context) =>
                     getCategorizedProduct(widget.categoryTitle),
-                child: ProductListTile(),
+                child: Visibility(
+                  visible: this.expanded,
+                  child: ProductListTile(),
+                ),
               ),
             ],
           ),
