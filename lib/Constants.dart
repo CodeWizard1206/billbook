@@ -48,15 +48,36 @@ void createPdf(CartModel _data) {
       pageFormat: PdfPageFormat.a4,
       build: (pw.Context context) {
         return [
-          pw.Text(
-            'CUSTOMER INVOICE',
-            style: pw.TextStyle(
-              fontSize: 20.0,
-              fontWeight: pw.FontWeight.bold,
-            ),
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.center,
+            crossAxisAlignment: pw.CrossAxisAlignment.center,
+            children: [
+              pw.Text(
+                '|| OM ||',
+                style: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
+            ],
           ),
           pw.SizedBox(
-            height: 10.0,
+            height: 5.0,
+          ),
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.center,
+            crossAxisAlignment: pw.CrossAxisAlignment.center,
+            children: [
+              pw.Text(
+                'CUSTOMER INVOICE',
+                style: pw.TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          pw.SizedBox(
+            height: 20.0,
           ),
           pw.Row(
             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,

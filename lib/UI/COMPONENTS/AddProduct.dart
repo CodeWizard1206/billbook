@@ -415,6 +415,7 @@ class _ProductDialogState extends State<ProductDialog> {
         onChanged: (value) {
           if (value != '') {
             setState(() {
+              this._data = this.widget.data;
               this._data = this
                   ._data
                   .where((element) => element.productName
